@@ -56,7 +56,7 @@ module.exports.login = async (req, res, next) => {
         });
     }catch(err){
         console.log(err);
-        res.rend('404');
+        res.render('404');
     };
 };
 
