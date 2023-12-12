@@ -14,13 +14,19 @@ function Contato(body) {
     this.body = body;
     this.errors = [];
     this.contato = null;
-}
+};
+
+Contato.buscaporid = async function(id){
+    if(typeof id !== 'string') return;
+    const user = await ContatoModel.findById(id)
+    return user;
+};
 
 Contato.prototype.register = async function () {
     this.valida();
-    if (this.errors.length > 0) return
+    if (this.errors.length > 0) return;
     this.contato = await ContatoModel.create(this.body);
-}
+};
 
 Contato.prototype.valida = function () {
     this.cleanUp();
@@ -28,21 +34,21 @@ Contato.prototype.valida = function () {
     if (this.body.email && !validator.isEmail(this.body.email)) this.errors.push('Email Inválido');
     if (!this.body.nome) this.errors.push('Nome é um campo obrigatório');
     if (!this.body.nome && !this.body.telefone) this.errors.push('Pelo menos um contato precisa ser enviado');
-}
+};
 
 Contato.prototype.cleanUp = function () {
     for (const key in this.body) {
         if (typeof this.body[key] !== 'string') {
             this.body[key] = ''
-        }
-    }
+        };
+    };
 
     this.body = {
         nome: this.body.nome,
         sobrenome: this.body.sobrenome,
         email: this.body.email,
         telefone: this.body.telefone
-    }
-}
+    };
+};
 
 module.exports = Contato;
