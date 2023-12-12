@@ -25,7 +25,7 @@ module.exports.register = async (req, res, next) => {
 }
 
 exports.editIndex = async (req, res) => {
-    if (!req.params.id) res.render('404');
+    if (!req.params.id) return res.render('404');
     const contato = await Contato.buscaporid(req.params.id);
 
     if (!contato) {
@@ -49,7 +49,7 @@ exports.edit = async (req, res) => {
         }
 
         req.flash('success', 'Contato editado com sucesso!');
-        req.session.save(() => res.redirect(`/contato/index/${contato.contato._id}`));
+        req.session.save(() => res.redirect(`/`));
         return;
     } catch (err) {
         console.log(err);
@@ -57,3 +57,16 @@ exports.edit = async (req, res) => {
     }
 };
 
+exports.delete = async (req, res) => {
+    if (!req.params.id) return res.render('404');
+    const contato = await Contato.delete(req.params.id);
+
+    if (!contato) {
+        res.render('404');
+        return;
+    }
+
+    req.flash('success', 'Seu contato foi apagado com sucesso!');
+    req.session.save(() => res.redirect(`/`));
+    return;
+};
