@@ -22,6 +22,15 @@ Contato.buscaporid = async function(id){
     return user;
 };
 
+Contato.prototype.edit = async function(id) {
+    if(typeof id !== 'string') return;
+    this.valida();
+    if(this.errors.length > 0) return;
+
+    this.contato = await ContatoModel.findByIdAndUpdate(id, this.body, { new: true });
+}
+
+
 Contato.prototype.register = async function () {
     this.valida();
     if (this.errors.length > 0) return;
