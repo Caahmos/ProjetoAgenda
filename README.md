@@ -42,7 +42,7 @@ A estrutura do projeto segue o padrão MVC, dividindo as responsabilidades em:
 
 ## Como Executar o Projeto
 
-1. Clone o repositório: `git clone https://github.com/AlexMoralesDEV/ProjetoAgenda.git`
+1. Clone o repositório: `git clone https://github.com/Caahmos/ProjetoAgenda.git`
 2. Acesse o diretório do projeto: `cd nome-do-repositorio`
 3. Instale as dependências: `npm install`
 4. Crie um arquivo `.env` na raiz do projeto e configure as variáveis necessárias, incluindo chaves secretas para a sessão.
